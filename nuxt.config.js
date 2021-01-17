@@ -1,5 +1,6 @@
 module.exports = {
   router: {
+    linkActiveClass: 'active',
     extendRoutes(routes, resolve) {
       routes.splice(0)
 
@@ -35,7 +36,7 @@ module.exports = {
                 component: resolve(__dirname, 'pages/settings/')
               },
               {
-                path: 'editor/:slug',
+                path: 'editor/:slug?',
                 name: 'editor',
                 component: resolve(__dirname, 'pages/editor/')
               },
