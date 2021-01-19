@@ -11,6 +11,7 @@ export const request = axios.create({
 export default ({ store }) => {
   request.interceptors.request.use((config) => {
     const { user } = store.state
+    console.log(user, '123123123123123')
     // 请求添加 token
     // config.headers.Authorization = 'Token eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6MTM0OTI0LCJ1c2VybmFtZSI6Im5vNW5vNiIsImV4cCI6MTYxNTk5NDI2OX0.-Yl6q2WUR7S_9uRzj1i9gFvSoySmmfwk5enwV4WhOgI'
     if (user && user.token) config.headers.Authorization = `Token ${user.token}`

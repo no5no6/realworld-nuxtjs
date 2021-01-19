@@ -5,9 +5,9 @@
         <div class="col-md-6 offset-md-3 col-xs-12">
           <h1 class="text-xs-center">{{ isLogin ? "Sign in" : "Sign up" }}</h1>
           <p class="text-xs-center">
-            <a href="">{{
+            <nuxt-link :to="isLogin ? 'register' : 'login'">{{
               isLogin ? "Need an account?" : "Have an account?"
-            }}</a>
+            }}</nuxt-link>
           </p>
 
           <ul class="error-messages">
@@ -61,9 +61,10 @@ import { login, register } from "@/api/user";
 // const moudle = process.client ? 'js-cookie' : undefined
 
 const Cookie =  process.client ? require('js-cookie') : undefined
-console.log(Cookie, 'cccccccccccc')
+
 export default {
   name: "LoginIndex",
+  middleware: 'no-auth',
   computed: {
     isLogin() {
       return this.$route.name === "login"
@@ -87,6 +88,11 @@ export default {
 
         // 保存用户状态
         this.$store.commit("setUser", data.user)
+        /**
+         *  1. 为了防止页面刷新丢失 vuex 里登录状态
+         *  2. 因为是 nuxt 应用，所以不能用浏览器的本地存储，需放到 cookie 中，这样前后端都可以访问。
+         *  3. 配合 nuxt 的 vuex 中提供的特定 actions ，做前后端同步登录状态。 详情见 @/store/index.js
+         */
         Cookie.set('user', data.user)
         
         this.$router.push("/")

@@ -13,14 +13,14 @@ export const mutations = {
   }
 }
 
-export const action = {
+export const actions = {
   /**
    *  1. nuxt 特定的 action
    *  2. 用于服务端初始化数据并传递给客户端使用。
    */
   nuxtServerInit ({ commit }, { req }) {
     let user = null
-
+    
     if (req.headers.cookie) {
       const parsed = cookieparser.parse(req.headers.cookie)
       try {

@@ -83,7 +83,8 @@
 
 <script>
 export default {
-  name: 'ProfileIndex'
+  name: 'ProfileIndex',
+  middleware: 'auth'
 }
 </script>
 
