@@ -45,7 +45,7 @@
                 minlength="8"
               />
             </fieldset>
-            <button class="btn btn-lg btn-primary pull-xs-right">
+            <button class="btn btn-lg btn-primary pull-xs-right" :disabled="disabledButton">
               {{ isLogin ? "Sign in" : "Sign up" }}
             </button>
           </form>
@@ -78,11 +78,15 @@ export default {
         username: "",
       },
       errors: "",
+      disabledButton: false
     };
   },
   methods: {
     async onSubmit() {
+      this.disabledButton = true
+      
       const exec = this.isLogin ? login : register
+
       try {
         let { data } = await exec({ user: this.user })
 
@@ -98,7 +102,9 @@ export default {
         this.$router.push("/")
       } catch (error) {
         this.errors = error.response.data.errors
+        this.disabledButton = false
       }
+
     },
   },
 };

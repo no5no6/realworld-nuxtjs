@@ -1,7 +1,8 @@
 import axios from 'axios'
 
 export const request = axios.create({
-  baseURL: 'http://realworld.api.fed.lagounews.com'
+  // baseURL: 'http://realworld.api.fed.lagounews.com'
+  baseURL: 'https://conduit.productionready.io'
 })
 
 /**

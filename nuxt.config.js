@@ -56,6 +56,7 @@ module.exports = {
     port: 3000
   },
   plugins:[
-    '@/plugins/request'
+    '@/plugins/request',
+    '@/plugins/dayjs'
   ],
 }

@@ -1,7 +1,9 @@
 import { request } from '@/plugins/request'
 
-// 用户登录
-export const login = user => request.post('/api/users/login', user)
+const prefix = '/api/users'
 
 // 用户注册
-export const register = user => request.post('/api/users', user)
+export const register = user => request.post(prefix, user)
+
+// 用户登录
+export const login = user => request.post(`${prefix}/login`, user)
