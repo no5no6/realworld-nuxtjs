@@ -2,6 +2,7 @@ import axios from 'axios'
 
 export const request = axios.create({
   // baseURL: 'http://realworld.api.fed.lagounews.com'
+  // 上边开发用的 url 点赞接口有问题
   baseURL: 'https://conduit.productionready.io'
 })
 
