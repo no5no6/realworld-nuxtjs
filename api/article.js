@@ -1,13 +1,13 @@
 import { request } from '@/plugins/request'
 
-const prefix = '/api/articles'
+const prefix = '/api'
 
-export const getArticles = params => request.get(prefix, { params })
+export const getArticles = params => request.get(`${prefix}/articles`, { params })
 
-export const getYourFeedArticles = params => request.get(`${prefix}/feed`, { params })
+export const getYourFeedArticles = params => request.get(`${prefix}/articles/feed`, { params })
 
-export const getArticle = params => request.get(`${prefix}/${params.slug}`)
+export const getArticle = params => request.get(`${prefix}/articles/${params.slug}`)
 
-export const addStar = slug => request.post(`${prefix}/${slug}/favorite`)
+export const addStar = slug => request.post(`${prefix}/articles/${slug}/favorite`)
 
-export const removeStar = slug => request.delete(`${prefix}/${slug}/favorite`)
+export const removeStar = slug => request.delete(`${prefix}/articles/${slug}/favorite`)

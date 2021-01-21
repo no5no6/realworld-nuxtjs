@@ -1,5 +1,5 @@
 import { request } from '@/plugins/request'
 
-const prefix = '/api/tags'
+const prefix = '/api'
 
-export const getTags = () => request.get(prefix)
+export const getTags = () => request.get(`${prefix}/tags`)

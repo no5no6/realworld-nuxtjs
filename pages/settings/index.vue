@@ -4,11 +4,11 @@
       <div class="row">
         <div class="col-md-6 offset-md-3 col-xs-12">
           <h1 class="text-xs-center">Your Settings</h1>
-
-          <form>
+          <form @submit.prevent="save">
             <fieldset>
               <fieldset class="form-group">
                 <input
+                  v-model="user.image"
                   class="form-control"
                   type="text"
                   placeholder="URL of profile picture"
@@ -16,6 +16,8 @@
               </fieldset>
               <fieldset class="form-group">
                 <input
+                  required
+                  v-model="user.username"
                   class="form-control form-control-lg"
                   type="text"
                   placeholder="Your Name"
@@ -23,6 +25,7 @@
               </fieldset>
               <fieldset class="form-group">
                 <textarea
+                  v-model="user.bio"
                   class="form-control form-control-lg"
                   rows="8"
                   placeholder="Short bio about you"
@@ -30,16 +33,21 @@
               </fieldset>
               <fieldset class="form-group">
                 <input
+                  required
+                  v-model="user.email"
                   class="form-control form-control-lg"
-                  type="text"
+                  type="email"
                   placeholder="Email"
                 />
               </fieldset>
               <fieldset class="form-group">
                 <input
+                  required
+                  v-model="user.password"
                   class="form-control form-control-lg"
                   type="password"
                   placeholder="Password"
+                  minlength="8"
                 />
               </fieldset>
               <button class="btn btn-lg btn-primary pull-xs-right">
@@ -54,7 +62,37 @@
 </template>
 
 <script>
-export default {}
+import { getUser, updateUser } from '@/api/user'
+
+export default {
+  name: 'SettingIndex',
+  async asyncData() {
+    let user = null
+
+    let { data } = await getUser()
+    user = data.user
+    
+    return {
+      user
+    }
+  },
+  methods: {
+    async save() {
+      // const params = _(this.user)
+      //   .pick(['username', 'password', 'image', 'bio', 'email'])
+      //   .reduce((memo, value, key) => {
+      //     if (value) memo.push({ [key]: value })
+      //     return memo
+      //   }, [])
+      const params = _.pick(this.user, ['username', 'password', 'image', 'bio', 'email'])
+
+      await updateUser(params)
+      console.log(params, '12312312312321')
+
+      this.$router.push({ name: 'home'})
+    }
+  }
+}
 </script>
 
 <style></style>

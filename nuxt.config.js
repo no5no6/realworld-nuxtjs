@@ -57,6 +57,10 @@ module.exports = {
   },
   plugins:[
     '@/plugins/request',
-    '@/plugins/dayjs'
+    '@/plugins/dayjs',
+    {
+      src: '@/plugins/lodash.js', 
+      ssr: false
+    }
   ],
 }
