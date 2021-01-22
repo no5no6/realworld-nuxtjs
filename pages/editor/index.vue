@@ -3,10 +3,11 @@
     <div class="container page">
       <div class="row">
         <div class="col-md-10 offset-md-1 col-xs-12">
-          <form>
+          <form @submit.prevent="save">
             <fieldset>
               <fieldset class="form-group">
                 <input
+                  v-model="obj.title"
                   type="text"
                   class="form-control form-control-lg"
                   placeholder="Article Title"
@@ -14,6 +15,7 @@
               </fieldset>
               <fieldset class="form-group">
                 <input
+                  v-model="obj.description"
                   type="text"
                   class="form-control"
                   placeholder="What's this article about?"
@@ -21,6 +23,7 @@
               </fieldset>
               <fieldset class="form-group">
                 <textarea
+                  v-model="obj.article"
                   class="form-control"
                   rows="8"
                   placeholder="Write your article (in markdown)"
@@ -28,6 +31,7 @@
               </fieldset>
               <fieldset class="form-group">
                 <input
+                  v-model="obj.tags"
                   type="text"
                   class="form-control"
                   placeholder="Enter tags"
@@ -49,9 +53,31 @@
 </template>
 
 <script>
+import { updateArticle , addArticle, getArticle } from '@/api/article'
+
 export default {
   name: 'EditorIndex',
-  middleware: 'auth'
+  middleware: 'auth',
+  async asyncData () {
+    let obj = {
+      title: '',
+      description: '',
+      article: '',
+      tags: ''
+    }
+
+    let { data } = getArticle(obj)
+    console.log(data)
+
+    return {
+      obj
+    }
+  },
+  methods: {
+    save() {
+
+    }
+  }
 }
 </script>
 

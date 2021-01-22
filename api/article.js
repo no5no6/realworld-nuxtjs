@@ -6,7 +6,11 @@ export const getArticles = params => request.get(`${prefix}/articles`, { params 
 
 export const getYourFeedArticles = params => request.get(`${prefix}/articles/feed`, { params })
 
-export const getArticle = params => request.get(`${prefix}/articles/${params.slug}`)
+export const getArticle = slug => request.get(`${prefix}/articles/${slug}`)
+
+export const addArticle = params => request.post(`${prefix}/api/articles`, params)
+
+export const updateArticle = params => request.put(`${prefix}/api/articles/${params.slug}`)
 
 export const addStar = slug => request.post(`${prefix}/articles/${slug}/favorite`)
 
