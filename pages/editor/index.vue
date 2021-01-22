@@ -3,7 +3,7 @@
     <div class="container page">
       <div class="row">
         <div class="col-md-10 offset-md-1 col-xs-12">
-          <form @submit.prevent="save">
+          <form submit.prevent="save">
             <fieldset>
               <fieldset class="form-group">
                 <input
@@ -53,12 +53,12 @@
 </template>
 
 <script>
-import { updateArticle , addArticle, getArticle } from '@/api/article'
+import { updateArticle , addArticle, getArticle } from '/api/article'
 
 export default {
   name: 'EditorIndex',
   middleware: 'auth',
-  async asyncData () {
+  async asyncData ({ params, redirect }) {
     let obj = {
       title: '',
       description: '',
@@ -66,16 +66,40 @@ export default {
       tags: ''
     }
 
-    let { data } = getArticle(obj)
-    console.log(data)
+    const slug = params.slug
+
+    if(slug) {
+      try {
+        let { data } = await getArticle(obj)
+        console.log(data)
+      } catch (error) {
+        redirect({ name: 'editor'})
+      }
+    }
 
     return {
-      obj
+      obj,
+      slug
     }
   },
   methods: {
-    save() {
+    async save() {
+      console.log('============')
+      if (this.slug) {
+        exec = updateArticle
+        Object.assign(this.obj, { slug: this.slug })
+      }else {
+        exec = addArticle
+      }
 
+      try {
+        await exec(this.obj)
+
+        this.$router.push({ name: 'article' })
+      } catch (error) {
+        
+      }
+      
     }
   }
 }
