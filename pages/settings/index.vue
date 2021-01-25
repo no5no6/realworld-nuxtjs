@@ -55,6 +55,10 @@
               </button>
             </fieldset>
           </form>
+          <hr />
+          <button class="btn btn-outline-danger" @click="logout">
+            Or click here to logout.
+          </button>
         </div>
       </div>
     </div>
@@ -63,6 +67,8 @@
 
 <script>
 import { getUser, updateUser } from '@/api/user'
+
+const Cookies =  process.client ? require('js-cookie') : undefine
 
 export default {
   name: 'SettingIndex',
@@ -90,6 +96,11 @@ export default {
       console.log(params, '12312312312321')
 
       this.$router.push({ name: 'home'})
+    },
+    logout() {
+      this.$store.commit("setUser", null)
+      Cookies.remove('user')
+      this.$router.push({name: 'home'})
     }
   }
 }

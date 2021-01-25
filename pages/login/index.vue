@@ -60,7 +60,7 @@ import { login, register } from "@/api/user";
 // 仅在客户端加载 js-cookie
 // const moudle = process.client ? 'js-cookie' : undefined
 
-const Cookie =  process.client ? require('js-cookie') : undefined
+const Cookies =  process.client ? require('js-cookie') : undefined
 
 export default {
   name: "LoginIndex",
@@ -97,7 +97,7 @@ export default {
          *  2. 因为是 nuxt 应用，所以不能用浏览器的本地存储，需放到 cookie 中，这样前后端都可以访问。
          *  3. 配合 nuxt 的 vuex 中提供的特定 actions ，做前后端同步登录状态。 详情见 @/store/index.js
          */
-        Cookie.set('user', data.user)
+        Cookies.set('user', data.user)
         
         this.$router.push("/")
       } catch (error) {
