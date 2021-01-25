@@ -167,9 +167,9 @@ import {
   getYourFeedArticles,
   addStar,
   removeStar,
-} from "@/api/article";
-import { getTags } from "@/api/tag";
-import { mapState } from "vuex";
+} from "@/api/article"
+import { getTags } from "@/api/tag"
+import { mapState } from "vuex"
 
 export default {
   name: "HomeIndex",
