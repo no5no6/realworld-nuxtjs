@@ -50,13 +50,13 @@
                   minlength="8"
                 />
               </fieldset>
-              <button class="btn btn-lg btn-primary pull-xs-right">
+              <button :disabled="buttonDisable" class="btn btn-lg btn-primary pull-xs-right">
                 Update Settings
               </button>
             </fieldset>
           </form>
           <hr />
-          <button class="btn btn-outline-danger" @click="logout">
+          <button :disabled="buttonDisable" class="btn btn-outline-danger" @click="logout">
             Or click here to logout.
           </button>
         </div>
@@ -72,6 +72,8 @@ const Cookies =  process.client ? require('js-cookie') : undefine
 
 export default {
   name: 'SettingIndex',
+  computed: {
+  },
   async asyncData() {
     let user = null
 
@@ -82,6 +84,11 @@ export default {
       user
     }
   },
+  data() {
+    return {
+      buttonDisable: false
+    }
+  },
   methods: {
     async save() {
       // const params = _(this.user)
@@ -90,17 +97,32 @@ export default {
       //     if (value) memo.push({ [key]: value })
       //     return memo
       //   }, [])
+
+      this.buttonDisable = true
       const params = _.pick(this.user, ['username', 'password', 'image', 'bio', 'email'])
 
-      await updateUser(params)
-      console.log(params, '12312312312321')
+      try {
+        await updateUser(params)
 
-      this.$router.push({ name: 'home'})
+        this.$store.commit('setUser', this.user)
+        Cookies.set('user', this.user)
+
+        this.$router.push({ name: 'home'})
+      } catch (error) {
+        this.buttonDisable = false
+      }
     },
     logout() {
-      this.$store.commit("setUser", null)
-      Cookies.remove('user')
-      this.$router.push({name: 'home'})
+      this.buttonDisable = true
+
+      try {
+        this.$store.commit("setUser", null)
+        Cookies.remove('user')
+
+        this.$router.push({name: 'home'})
+      } catch (error) {
+        this.buttonDisable = false
+      }
     }
   }
 }
