@@ -8,9 +8,9 @@ export const getYourFeedArticles = params => request.get(`${prefix}/articles/fee
 
 export const getArticle = slug => request.get(`${prefix}/articles/${slug}`)
 
-export const addArticle = params => request.post(`${prefix}/api/articles`, params)
+export const addArticle = params => request.post(`${prefix}/articles`, params)
 
-export const updateArticle = params => request.put(`${prefix}/api/articles/${params.slug}`)
+export const updateArticle = params => request.put(`${prefix}/articles/${params.slug}`)
 
 export const addStar = slug => request.post(`${prefix}/articles/${slug}/favorite`)
 

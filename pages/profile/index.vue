@@ -139,6 +139,7 @@ export default {
   middleware: 'auth',
   watchQuery: ['tab', 'user', 'currentPage'],
   async asyncData({ store, params, query }) {
+
     const username = params.username
     const currentUser = store.state.user
 

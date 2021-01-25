@@ -23,7 +23,7 @@
               </fieldset>
               <fieldset class="form-group">
                 <textarea
-                  v-model="obj.article"
+                  v-model="obj.body"
                   class="form-control"
                   rows="8"
                   placeholder="Write your article (in markdown)"
@@ -39,8 +39,10 @@
                 <div class="tag-list"></div>
               </fieldset>
               <button
+                :disabled="buttonDisabled"
                 class="btn btn-lg pull-xs-right btn-primary"
                 type="button"
+                @click="save"
               >
                 Publish Article
               </button>
@@ -62,7 +64,7 @@ export default {
     let obj = {
       title: '',
       description: '',
-      article: '',
+      body: '',
       tags: ''
     }
 
@@ -70,8 +72,10 @@ export default {
 
     if(slug) {
       try {
-        let { data } = await getArticle(obj)
+        let { data } = await getArticle(slug)
         console.log(data)
+        Object.assign(obj, data.article)
+        obj.tags = obj.tagList.join(',')
       } catch (error) {
         redirect({ name: 'editor'})
       }
@@ -82,22 +86,25 @@ export default {
       slug
     }
   },
+  data() {
+    return {
+      buttonDisabled: false
+    }
+  },
   methods: {
     async save() {
-      console.log('============')
-      if (this.slug) {
-        exec = updateArticle
-        Object.assign(this.obj, { slug: this.slug })
-      }else {
-        exec = addArticle
-      }
+      this.buttonDisabled = true
 
+      const exec = this.slug ? updateArticle : addArticle
+      this.obj.tagList = this.obj.tags.split(',')
+      delete this.obj.tags
+      
       try {
-        await exec(this.obj)
-
-        this.$router.push({ name: 'article' })
+        let { data } = await exec({ article: this.obj })
+ 
+        this.$router.push({ name: 'article', params: { slug: data.article.slug } })
       } catch (error) {
-        
+        this.buttonDisabled = false 
       }
       
     }
