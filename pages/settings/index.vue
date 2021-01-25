@@ -67,8 +67,9 @@
 
 <script>
 import { getUser, updateUser } from '@/api/user'
+import _ from '@/plugins/lodash'
 
-const Cookies =  process.client ? require('js-cookie') : undefine
+const Cookies =  process.client ? require('js-cookie') : undefined
 
 export default {
   name: 'SettingIndex',
@@ -80,7 +81,7 @@ export default {
     // let { data } = await getUser()
     // user = data.user
     const user = _.cloneDeep(store.state.user)
-    
+
     return {
       user
     }

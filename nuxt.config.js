@@ -26,7 +26,7 @@ module.exports = {
                 component: resolve(__dirname, 'pages/login/')
               },
               {
-                path: 'profile/:username',
+                path: 'profile/:username?',
                 name: 'profile',
                 component: resolve(__dirname, 'pages/profile/')
               },
@@ -58,9 +58,10 @@ module.exports = {
   plugins:[
     '@/plugins/request',
     '@/plugins/dayjs',
-    {
-      src: '@/plugins/lodash.js', 
-      ssr: false
-    }
+    '@/plugins/lodash'
+    // {
+    //   src: '@/plugins/lodash.js', 
+    //   ssr: false
+    // }
   ],
 }

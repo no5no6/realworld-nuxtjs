@@ -211,8 +211,6 @@ export default {
 
     const tags = tagsResponse.data.tags.slice(0, 20)
 
-    console.log(articles, "=----------", tags)
-
     return {
       limit, // 每页展示条数
       tab, // 选中 tab 标签

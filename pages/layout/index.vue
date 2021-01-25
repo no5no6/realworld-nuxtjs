@@ -9,7 +9,7 @@
             <nuxt-link class="nav-link" to="/" exact>Home</nuxt-link>
           </li>
           <li class="nav-item" v-if="user">
-            <nuxt-link class="nav-link" to="/editor/123">
+            <nuxt-link class="nav-link" to="/editor">
               <i class="ion-compose"></i>&nbsp;New Post
             </nuxt-link>
           </li>
@@ -25,7 +25,12 @@
             <nuxt-link class="nav-link" to="/register">Sign up</nuxt-link>
           </li>
           <li class="nav-item" v-if="user">
-            <nuxt-link class="nav-link" to="/profile/123">
+            <nuxt-link class="nav-link" :to="{
+              name: 'profile',
+              params: {
+                username: user.username
+              }
+            }">
               <img
                 class="user-pic"
                 src="https://octodex.github.com/images/spidertocat.png"
