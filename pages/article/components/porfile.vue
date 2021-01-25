@@ -20,8 +20,8 @@
       &nbsp; {{ article.author.following ? 'Unfollow' : 'Follow' }} {{ article.author.username }} <span class="counter">({{article.favoritesCount}})</span>
     </button>
     <button
-        class="btn btn-sm btn-outline-secondary"
-        :class="{ active: article.favorited }"
+        class="btn btn-sm btn-outline-secondary un-star"
+        :class="{ 'star': article.favorited}"
         @click="onStar"
         :disabled="favoriteButtonDisabled"
       >
@@ -82,9 +82,9 @@ export default {
           this.article.favoritesCount -= 1
         }
 
-        this.disableButton = false
+        this.favoriteButtonDisabled = false
       } catch (error) {
-        this.disableButton = false 
+        this.favoriteButtonDisabled = false 
       }
     },
   }
@@ -92,5 +92,13 @@ export default {
 </script>
 
 <style>
-
+  .un-star {
+    border: 1px solid #5CB85C;
+    color: #5CB85C;
+  }
+  .star {
+    color: #fff;
+    background-color: #5CB85C;
+    border-color: #5CB85C;
+  }
 </style>
