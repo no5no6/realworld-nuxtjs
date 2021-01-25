@@ -74,11 +74,12 @@ export default {
   name: 'SettingIndex',
   computed: {
   },
-  async asyncData() {
-    let user = null
+  async asyncData({ store }) {
+    // let user = null
 
-    let { data } = await getUser()
-    user = data.user
+    // let { data } = await getUser()
+    // user = data.user
+    const user = _.cloneDeep(store.state.user)
     
     return {
       user
