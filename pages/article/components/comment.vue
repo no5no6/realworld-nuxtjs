@@ -115,6 +115,7 @@ export default {
       try {
         await removeComment({ id, slug: this.slug })
         this.$emit('removeComment', id)
+        this.removeButtonDisabled = true
       } catch (error) {
         this.removeButtonDisabled = false
       }
