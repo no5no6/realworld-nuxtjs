@@ -96,11 +96,12 @@ export default {
       this.buttonDisabled = true
 
       const exec = this.slug ? updateArticle : addArticle
+      console.log(this.obj, '12312312312312321')
       this.obj.tagList = this.obj.tags.split(',')
       delete this.obj.tags
 
       try {
-        let { data } = await exec({ article: this.obj })
+        let { data } = await exec({ article: this.obj }, this.slug)
 
         this.$router.push({ name: 'article', params: { slug: data.article.slug } })
       } catch (error) {
