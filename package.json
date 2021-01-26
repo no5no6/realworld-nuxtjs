@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "serve": "nuxt",
+    "serve": "nuxt"
   },
   "keywords": [],
   "author": "",

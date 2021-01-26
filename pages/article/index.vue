@@ -39,6 +39,14 @@ export default {
     Profile,
     ArticleComment
   },
+  head () {
+    return {
+      title: `${this.article.title}-Realworld`,
+      meta: [
+        { hid: 'description', name: 'description', content: this.article.description }
+      ]
+    }
+  },
   async asyncData ({ params }) {
     const slug = params.slug
 
