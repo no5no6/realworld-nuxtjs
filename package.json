@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "serve": "nuxt",
+    "lint": "vue-cli-service lint",
     "precommit-lint": "lint-staged"
   },
   "lint-staged": {
