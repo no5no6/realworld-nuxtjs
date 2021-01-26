@@ -5,15 +5,7 @@
   "main": "index.js",
   "scripts": {
     "serve": "nuxt",
-    "lint": "vue-cli-service lint",
-    "precommit-lint": "lint-staged"
   },
-  "lint-staged": {
-    "src/**/*.{js,vue}": [
-      "yarn lint",
-      "git add"
-    ]
-  }, 
   "keywords": [],
   "author": "",
   "license": "ISC",
