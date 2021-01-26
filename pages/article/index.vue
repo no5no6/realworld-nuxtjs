@@ -18,7 +18,7 @@
           <p>It's a great solution for learning how other frameworks work.</p>
         </div>
       </div>
-      
+
       <hr />
 
       <div class="article-actions">
@@ -104,7 +104,7 @@ export default {
   components: {
     Profile
   },
-  async asyncData({ params }) {
+  async asyncData ({ params }) {
     const slug = params.slug
 
     let { data } = await getArticle(slug)
@@ -113,9 +113,8 @@ export default {
     return {
       article
     }
-
   },
-  data() {
+  data () {
     return {
     }
   }

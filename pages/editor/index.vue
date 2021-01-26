@@ -55,7 +55,7 @@
 </template>
 
 <script>
-import { updateArticle , addArticle, getArticle } from '/api/article'
+import { updateArticle, addArticle, getArticle } from '/api/article'
 
 export default {
   name: 'EditorIndex',
@@ -70,14 +70,14 @@ export default {
 
     const slug = params.slug
 
-    if(slug) {
+    if (slug) {
       try {
         let { data } = await getArticle(slug)
         console.log(data)
         Object.assign(obj, data.article)
         obj.tags = obj.tagList.join(',')
       } catch (error) {
-        redirect({ name: 'editor'})
+        redirect({ name: 'editor' })
       }
     }
 
@@ -86,27 +86,26 @@ export default {
       slug
     }
   },
-  data() {
+  data () {
     return {
       buttonDisabled: false
     }
   },
   methods: {
-    async save() {
+    async save () {
       this.buttonDisabled = true
 
       const exec = this.slug ? updateArticle : addArticle
       this.obj.tagList = this.obj.tags.split(',')
       delete this.obj.tags
-      
+
       try {
         let { data } = await exec({ article: this.obj })
- 
+
         this.$router.push({ name: 'article', params: { slug: data.article.slug } })
       } catch (error) {
-        this.buttonDisabled = false 
+        this.buttonDisabled = false
       }
-      
     }
   }
 }

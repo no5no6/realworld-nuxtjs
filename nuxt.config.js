@@ -1,7 +1,7 @@
 module.exports = {
   router: {
     linkActiveClass: 'active',
-    extendRoutes(routes, resolve) {
+    extendRoutes (routes, resolve) {
       routes.splice(0)
 
       routes.push(
@@ -55,13 +55,13 @@ module.exports = {
     host: '0.0.0.0',
     port: 3000
   },
-  plugins:[
+  plugins: [
     '@/plugins/request',
     '@/plugins/dayjs',
     '@/plugins/lodash'
     // {
-    //   src: '@/plugins/lodash.js', 
+    //   src: '@/plugins/lodash.js'
     //   ssr: false
     // }
-  ],
+  ]
 }

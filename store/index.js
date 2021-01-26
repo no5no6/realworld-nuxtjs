@@ -8,7 +8,7 @@ export const state = () => {
 }
 
 export const mutations = {
-  setUser(state, data) {
+  setUser (state, data) {
     state.user = data
   }
 }
@@ -20,7 +20,7 @@ export const actions = {
    */
   nuxtServerInit ({ commit }, { req }) {
     let user = null
-    
+
     if (req.headers.cookie) {
       const parsed = cookieparser.parse(req.headers.cookie)
       try {
@@ -31,5 +31,5 @@ export const actions = {
     }
 
     commit('setUser', user)
-  }                                                                                                          
+  }
 }

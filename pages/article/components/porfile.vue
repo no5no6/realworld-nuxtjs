@@ -11,7 +11,7 @@
         name: 'profile',
         params: {
           username: article.author.username
-        }, 
+        },
       }" class="author">{{ article.author.username }}</nuxt-link>
       <span class="date">{{ article.updatedAt | date() }}</span>
     </div>
@@ -26,7 +26,7 @@
         :disabled="favoriteButtonDisabled"
       >
         <i class="ion-heart"></i>
-        &nbsp; {{ article.favorited ? 'UnFavorite' : 'Favorite'}} Arcticle <span class="counter">({{ article.favoritesCount }})</span> 
+        &nbsp; {{ article.favorited ? 'UnFavorite' : 'Favorite'}} Arcticle <span class="counter">({{ article.favoritesCount }})</span>
     </button>
   </div>
 </template>
@@ -34,7 +34,7 @@
 <script>
 // import { mapState } from "vuex"
 import { addFollowUser, removeFollowUser } from '@/api/profile'
-import { addStar, removeStar } from "@/api/article"
+import { addStar, removeStar } from '@/api/article'
 
 export default {
   name: 'ArticleProfile',
@@ -46,7 +46,7 @@ export default {
       }
     }
   },
-  data() {
+  data () {
     return {
       favoriteButtonDisabled: false,
       followButtonDisabled: false
@@ -55,12 +55,12 @@ export default {
   computed: {
   },
   methods: {
-    async onFollow() {
+    async onFollow () {
       this.followButtonDisabled = true
       // this.user.following = !this.user.following
-      this.article.author.following = !this.article.author.following 
+      this.article.author.following = !this.article.author.following
 
-      const exec = this.article.author.following  ? addFollowUser : removeFollowUser
+      const exec = this.article.author.following ? addFollowUser : removeFollowUser
 
       try {
         await exec(this.article.author.username)
@@ -69,7 +69,7 @@ export default {
         this.followButtonDisabled = false
       }
     },
-    async onStar() {
+    async onStar () {
       this.favoriteButtonDisabled = true
       this.article.favorited = !this.article.favorited
 
@@ -84,9 +84,9 @@ export default {
 
         this.favoriteButtonDisabled = false
       } catch (error) {
-        this.favoriteButtonDisabled = false 
+        this.favoriteButtonDisabled = false
       }
-    },
+    }
   }
 }
 </script>

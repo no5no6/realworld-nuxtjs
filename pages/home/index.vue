@@ -121,8 +121,8 @@
                 class="page-item"
                 :class="{ active: page === currentPage }"
               >
-                <nuxt-link 
-                  class="page-link" 
+                <nuxt-link
+                  class="page-link"
                   :to="{
                     name: 'home',
                     query: {
@@ -166,13 +166,13 @@ import {
   getArticles,
   getYourFeedArticles,
   addStar,
-  removeStar,
-} from "@/api/article"
-import { getTags } from "@/api/tag"
-import { mapState } from "vuex"
+  removeStar
+} from '@/api/article'
+import { getTags } from '@/api/tag'
+import { mapState } from 'vuex'
 
 export default {
-  name: "HomeIndex",
+  name: 'HomeIndex',
   /**
    *  用于监听只有参数改变，url为改变的情况。用于跳转当前页面，参数改变，重新渲染页面。
    */
@@ -182,7 +182,7 @@ export default {
    *  2. asyncData 方法不能调用 this， 但已注入 context 参数，从中可以获取 prams，query 等等。
    *  3. 返回值会合并到原有的 data 中。
    */
-  async asyncData({ query }) {
+  async asyncData ({ query }) {
     /**
      *  1. 获取文章列表
      *     - 公共文章
@@ -201,10 +201,10 @@ export default {
       getList({
         tag,
         limit,
-        offset: (+currentPage - 1) * limit,
+        offset: (+currentPage - 1) * limit
       }),
-      getTags(),
-    ]);
+      getTags()
+    ])
 
     let { articles, articlesCount } = articlesResponse.data
     articles.forEach((article) => (article.disableButton = false))
@@ -218,17 +218,17 @@ export default {
       articles, // 文章列表
       articlesCount, // 文章总条数
       tags, // 标签列表
-      tag, // 筛选标签
-    };
+      tag // 筛选标签
+    }
   },
   computed: {
     ...mapState(['user']),
-    totalPage() {
+    totalPage () {
       return Math.ceil(this.articlesCount / this.limit)
-    },
+    }
   },
   methods: {
-    async onStar(article) {
+    async onStar (article) {
       article.disableButton = true
       article.favorited = !article.favorited
 
@@ -241,10 +241,10 @@ export default {
       }
 
       article.disableButton = false
-    },
+    }
   },
-  created() {},
-};
+  created () {}
+}
 </script>
 
 <style></style>

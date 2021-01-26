@@ -66,16 +66,16 @@
 </template>
 
 <script>
-import { getUser, updateUser } from '@/api/user'
+import { updateUser } from '@/api/user'
 import _ from '@/plugins/lodash'
 
-const Cookies =  process.client ? require('js-cookie') : undefined
+const Cookies = process.client ? require('js-cookie') : undefined
 
 export default {
   name: 'SettingIndex',
   computed: {
   },
-  async asyncData({ store }) {
+  async asyncData ({ store }) {
     // let user = null
 
     // let { data } = await getUser()
@@ -86,13 +86,13 @@ export default {
       user
     }
   },
-  data() {
+  data () {
     return {
       buttonDisable: false
     }
   },
   methods: {
-    async save() {
+    async save () {
       // const params = _(this.user)
       //   .pick(['username', 'password', 'image', 'bio', 'email'])
       //   .reduce((memo, value, key) => {
@@ -109,19 +109,19 @@ export default {
         this.$store.commit('setUser', this.user)
         Cookies.set('user', this.user)
 
-        this.$router.push({ name: 'home'})
+        this.$router.push({ name: 'home' })
       } catch (error) {
         this.buttonDisable = false
       }
     },
-    logout() {
+    logout () {
       this.buttonDisable = true
 
       try {
-        this.$store.commit("setUser", null)
+        this.$store.commit('setUser', null)
         Cookies.remove('user')
 
-        this.$router.push({name: 'home'})
+        this.$router.push({ name: 'home' })
       } catch (error) {
         this.buttonDisable = false
       }

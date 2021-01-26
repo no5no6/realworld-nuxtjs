@@ -1,6 +1,6 @@
 // let _ = require('lodash')
 
-//window._ = _
+// window._ = _
 // export const _ = require('lodash')
-let _ = require('lodash')
+const _ = require('lodash')
 export default _

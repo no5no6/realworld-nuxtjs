@@ -56,58 +56,57 @@
 </template>
 
 <script>
-import { login, register } from "@/api/user";
+import { login, register } from '@/api/user'
 // 仅在客户端加载 js-cookie
 // const moudle = process.client ? 'js-cookie' : undefined
 
-const Cookies =  process.client ? require('js-cookie') : undefined
+const Cookies = process.client ? require('js-cookie') : undefined
 
 export default {
-  name: "LoginIndex",
+  name: 'LoginIndex',
   middleware: 'no-auth',
   computed: {
-    isLogin() {
-      return this.$route.name === "login"
-    },
+    isLogin () {
+      return this.$route.name === 'login'
+    }
   },
-  data() {
+  data () {
     return {
       user: {
-        email: "",
-        password: "",
-        username: "",
+        email: '',
+        password: '',
+        username: ''
       },
-      errors: "",
+      errors: '',
       disabledButton: false
-    };
+    }
   },
   methods: {
-    async onSubmit() {
+    async onSubmit () {
       this.disabledButton = true
-      
+
       const exec = this.isLogin ? login : register
 
       try {
         let { data } = await exec({ user: this.user })
 
         // 保存用户状态
-        this.$store.commit("setUser", data.user)
+        this.$store.commit('setUser', data.user)
         /**
          *  1. 为了防止页面刷新丢失 vuex 里登录状态
          *  2. 因为是 nuxt 应用，所以不能用浏览器的本地存储，需放到 cookie 中，这样前后端都可以访问。
          *  3. 配合 nuxt 的 vuex 中提供的特定 actions ，做前后端同步登录状态。 详情见 @/store/index.js
          */
         Cookies.set('user', data.user)
-        
-        this.$router.push("/")
+
+        this.$router.push('/')
       } catch (error) {
         this.errors = error.response.data.errors
         this.disabledButton = false
       }
-
-    },
-  },
-};
+    }
+  }
+}
 </script>
 
 <style></style>

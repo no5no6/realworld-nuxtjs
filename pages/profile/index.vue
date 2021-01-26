@@ -28,7 +28,7 @@
             <ul class="nav nav-pills outline-active">
               <li class="nav-item">
                 <nuxt-link exact class="nav-link" :class="{active: tab === 'my'}" :to="{
-                  name: 'profile', 
+                  name: 'profile',
                   params: {
                     username: user.username,
                   },
@@ -106,8 +106,8 @@
                 class="page-item"
                 :class="{ active: page === currentPage }"
               >
-                <nuxt-link 
-                  class="page-link" 
+                <nuxt-link
+                  class="page-link"
                   :to="{
                     name: 'profile',
                     query: {
@@ -128,7 +128,7 @@
   </div>
 </template>
 
-<script> 
+<script>
 import _ from '@/plugins/lodash'
 
 import { getProfile, addFollowUser, removeFollowUser } from '@/api/profile'
@@ -138,8 +138,7 @@ export default {
   name: 'ProfileIndex',
   middleware: 'auth',
   watchQuery: ['tab', 'user', 'currentPage'],
-  async asyncData({ store, params, query }) {
-
+  async asyncData ({ store, params, query }) {
     const username = params.username
     const currentUser = store.state.user
 
@@ -151,11 +150,11 @@ export default {
     let requestParams = {
       limit,
       tab,
-      offset: (+currentPage - 1) * limit,
+      offset: (+currentPage - 1) * limit
     }
-    
-    Object.assign(requestParams, {[tab === 'my' ? 'author' : 'favorited']: username})
-    
+
+    Object.assign(requestParams, { [tab === 'my' ? 'author' : 'favorited']: username })
+
     promise.push(
       getArticles(requestParams)
     )
@@ -163,10 +162,10 @@ export default {
     username !== currentUser.username && promise.push(getProfile(username))
 
     let [articlesResponse, profileResponse] = await Promise.all(promise)
-    let { articles, articlesCount } = articlesResponse.data    
+    let { articles, articlesCount } = articlesResponse.data
     articles.forEach((article) => (article.disableButton = false))
     user = profileResponse ? profileResponse.data.profile : _.cloneDeep(currentUser)
-    
+
     return {
       user,
       currentPage,
@@ -176,18 +175,18 @@ export default {
       articlesCount
     }
   },
-  data() {
+  data () {
     return {
       buttonDisabled: false
     }
   },
   computed: {
-    totalPage() {
+    totalPage () {
       return Math.ceil(this.articlesCount / this.limit)
     }
   },
   methods: {
-    async onFollow() {
+    async onFollow () {
       this.buttonDisabled = true
       this.user.following = !this.user.following
 
