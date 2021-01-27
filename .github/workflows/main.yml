@@ -24,7 +24,7 @@ jobs:
           rm -rf realworld-nuxtjs
           mkdir realworld-nuxtjs
           cd realworld-nuxtjs  
-          wget https://github.com/no5no6/realworld-nuxtjs/releases/download/v0.7.3/release.tgz -O release.tgz
+          wget https://dl0.serctl.com/downloads5/2021-01-27-23-28-29-download-release.tgz -O release.tgz
           tar zxvf 2021-01-27-23-28-29-download-release.tgz
           npm ci
           pm2 start
