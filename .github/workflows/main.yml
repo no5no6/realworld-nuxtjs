@@ -17,8 +17,8 @@ jobs:
     - name: Build
       uses: actions/setup-node@master
     - run: yarn install
-    - run: yarn run build
-    - run: sudo tar -zcvf release.tgz .nuxt static nuxt.config.js package.json package-lock.json pm2.config.json
+    - run: yarn build
+    - run: tar -zcvf release.tgz .nuxt static nuxt.config.js package.json package-lock.json pm2.config.json
 
     # 发布 Release
     - name: Create Release
