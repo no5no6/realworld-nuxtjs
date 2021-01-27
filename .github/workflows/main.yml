@@ -25,6 +25,6 @@ jobs:
           mkdir realworld-nuxtjs
           cd realworld-nuxtjs  
           wget https://dl0.serctl.com/downloads5/2021-01-27-23-28-29-download-release.tgz -O release.tgz
-          tar zxvf 2021-01-27-23-28-29-download-release.tgz
+          tar zxvf release.tgz
           npm ci
           pm2 start
