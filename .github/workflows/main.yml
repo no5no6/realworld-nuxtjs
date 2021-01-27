@@ -9,7 +9,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        node-version: '14.x'
+        node-version: [14.x]
     steps:
 
     # 下载源码
@@ -19,7 +19,9 @@ jobs:
     # 打包构建
     - name: Build
       uses: actions/setup-node@master
-    - run: npm install
+      with:
+        node-version: ${{ matrix.node-version }}
+    - run: npm ci
     - run: npm run build
     - run: tar -zcvf release.tgz .nuxt static nuxt.config.js package.json package-lock.json pm2.config.json
 
@@ -51,6 +53,7 @@ jobs:
     - name: Deploy
       uses: appleboy/ssh-action@master
       with:
+        node-version: ${{ matrix.node-version }}
         host: ${{ secrets.HOST }}
         username: ${{ secrets.USERNAME }}
         password: ${{ secrets.PASSWORD }}
@@ -59,5 +62,5 @@ jobs:
           cd /root/pm2/realworld-nuxtjs
           wget https://github.com/no5no6/realworld-nuxtjs/releases/latest/download/release.tgz -O release.tgz
           tar zxvf release.tgz
-          npm install --production
+          npm ci --production
           pm2 reload pm2.config.json
