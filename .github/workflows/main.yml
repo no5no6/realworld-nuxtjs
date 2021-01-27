@@ -53,7 +53,6 @@ jobs:
     - name: Deploy
       uses: appleboy/ssh-action@master
       with:
-        node-version: ${{ matrix.node-version }}
         host: ${{ secrets.HOST }}
         username: ${{ secrets.USERNAME }}
         password: ${{ secrets.PASSWORD }}
