@@ -63,4 +63,4 @@ jobs:
           wget https://github.com/no5no6/realworld-nuxtjs/releases/latest/download/release.tgz -O release.tgz
           tar zxvf release.tgz
           npm ci
-          pm2 reload npm --start --name RealWorld
+          pm2 start pm2.config.json
