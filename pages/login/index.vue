@@ -12,7 +12,9 @@
 
           <ul class="error-messages">
             <li v-for="(error, key, index) in errors" :key="index">
-              {{ key }} {{ error }}
+              <div v-for="(item, idx) in error" :key="idx">
+                <div>{{ key }} {{ item }}</div>
+              </div>
             </li>
           </ul>
           <!-- 增加 prevent 属性，阻止表单默认提交行为，只触发我们自己写的提交方法 -->
