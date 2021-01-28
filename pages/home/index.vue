@@ -229,18 +229,22 @@ export default {
   },
   methods: {
     async onStar (article) {
-      article.disableButton = true
-      article.favorited = !article.favorited
+      if (this.user) {
+        article.disableButton = true
+        article.favorited = !article.favorited
 
-      if (article.favorited) {
-        await addStar(article.slug)
-        article.favoritesCount += 1
+        if (article.favorited) {
+          await addStar(article.slug)
+          article.favoritesCount += 1
+        } else {
+          await removeStar(article.slug)
+          article.favoritesCount -= 1
+        }
+
+        article.disableButton = false
       } else {
-        await removeStar(article.slug)
-        article.favoritesCount -= 1
+        this.$router.push({ name: 'login' })
       }
-
-      article.disableButton = false
     }
   },
   created () {}

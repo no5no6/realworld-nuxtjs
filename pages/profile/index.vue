@@ -187,16 +187,20 @@ export default {
   },
   methods: {
     async onFollow () {
-      this.buttonDisabled = true
-      this.user.following = !this.user.following
+      if (this.user) {
+        this.buttonDisabled = true
+        this.user.following = !this.user.following
 
-      const exec = this.user.following ? addFollowUser : removeFollowUser
+        const exec = this.user.following ? addFollowUser : removeFollowUser
 
-      try {
-        await exec(this.user.username)
-        this.buttonDisabled = false
-      } catch (error) {
-        this.buttonDisabled = false
+        try {
+          await exec(this.user.username)
+          this.buttonDisabled = false
+        } catch (error) {
+          this.buttonDisabled = false
+        }
+      } else {
+        this.$router.push({ name: 'login' })
       }
     }
   }

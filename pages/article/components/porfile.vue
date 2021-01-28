@@ -94,37 +94,45 @@ export default {
   },
   methods: {
     async onFollow () {
-      this.followButtonDisabled = true
-      // this.user.following = !this.user.following
-      this.article.author.following = !this.article.author.following
+      if (this.user) {
+        this.followButtonDisabled = true
+        // this.user.following = !this.user.following
+        this.article.author.following = !this.article.author.following
 
-      const exec = this.article.author.following
-        ? addFollowUser
-        : removeFollowUser
+        const exec = this.article.author.following
+          ? addFollowUser
+          : removeFollowUser
 
-      try {
-        await exec(this.article.author.username)
-        this.followButtonDisabled = false
-      } catch (error) {
-        this.followButtonDisabled = false
+        try {
+          await exec(this.article.author.username)
+          this.followButtonDisabled = false
+        } catch (error) {
+          this.followButtonDisabled = false
+        }
+      } else {
+        this.$router.push({ name: 'login' })
       }
     },
     async onStar () {
-      this.favoriteButtonDisabled = true
-      this.article.favorited = !this.article.favorited
+      if (this.user) {
+        this.favoriteButtonDisabled = true
+        this.article.favorited = !this.article.favorited
 
-      try {
-        if (this.article.favorited) {
-          await addStar(this.article.slug)
-          this.article.favoritesCount += 1
-        } else {
-          await removeStar(this.article.slug)
-          this.article.favoritesCount -= 1
+        try {
+          if (this.article.favorited) {
+            await addStar(this.article.slug)
+            this.article.favoritesCount += 1
+          } else {
+            await removeStar(this.article.slug)
+            this.article.favoritesCount -= 1
+          }
+
+          this.favoriteButtonDisabled = false
+        } catch (error) {
+          this.favoriteButtonDisabled = false
         }
-
-        this.favoriteButtonDisabled = false
-      } catch (error) {
-        this.favoriteButtonDisabled = false
+      } else {
+        this.$router.push({ name: 'login' })
       }
     },
     async remove () {
