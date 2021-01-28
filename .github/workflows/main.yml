@@ -23,7 +23,7 @@ jobs:
         node-version: ${{ matrix.node-version }}
     - run: npm ci
     - run: npm run build
-    - run: tar -zcvf release.tgz .nuxt static nuxt.config.js package.json package-lock.json ecosystem.config.js
+    - run: tar -zcvf release.tgz .nuxt static nuxt.config.js package.json yarn.lock ecosystem.config.js
 
     # 发布 Release
     - name: Create Release
@@ -58,10 +58,8 @@ jobs:
         password: ${{ secrets.PASSWORD }}
         port: ${{ secrets.PORT }}
         script: |
-          rm -rf realworld-nuxtjs
-          mkdir realworld-nuxtjs
           cd realworld-nuxtjs  
           wget https://github.com/no5no6/realworld-nuxtjs/releases/latest/download/release.tgz -O release.tgz
           tar zxvf release.tgz
-          npm ci
-          pm2 reload
+          yarn install --production
+          pm2 start
