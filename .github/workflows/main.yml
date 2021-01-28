@@ -21,8 +21,8 @@ jobs:
       uses: actions/setup-node@master
       with:
         node-version: ${{ matrix.node-version }}
-    - run: npm ci
-    - run: npm run build
+    - run: yarn install
+    - run: yarn build
     - run: tar -zcvf release.tgz .nuxt static nuxt.config.js package.json yarn.lock ecosystem.config.js
 
     # 发布 Release
