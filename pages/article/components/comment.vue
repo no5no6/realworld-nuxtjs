@@ -1,7 +1,7 @@
 <template>
   <div class="row">
     <div class="col-xs-12 col-md-8 offset-md-2">
-      <form class="card comment-form" @submit.prevent="save">
+      <form v-if="user" class="card comment-form" @submit.prevent="save">
         <div class="card-block">
           <textarea
             required
@@ -12,15 +12,19 @@
           ></textarea>
         </div>
         <div class="card-footer">
-          <img
-            :src="user.image"
-            class="comment-author-img"
-          />
+          <img :src="user.image" class="comment-author-img" />
           <button :disabled="buttonDisabled" class="btn btn-sm btn-primary">
             Post Comment
           </button>
         </div>
       </form>
+      <div v-else class="row">
+        <p style="display: inherit;">
+          <nuxt-link to="/login">Sign in</nuxt-link> or
+          <nuxt-link to="/register">sign up</nuxt-link> to add
+          comments on this article.
+        </p>
+      </div>
 
       <div class="card" v-for="comment in data" :key="comment.id">
         <div class="card-block">
@@ -29,28 +33,34 @@
           </p>
         </div>
         <div class="card-footer">
-          <nuxt-link :to="{
-            name: 'profile',
-            params: {
-              username: comment.author.username,
-            }
-          }" class="comment-author">
-            <img
-              :src="comment.author.image"
-              class="comment-author-img"
-            />
+          <nuxt-link
+            :to="{
+              name: 'profile',
+              params: {
+                username: comment.author.username,
+              },
+            }"
+            class="comment-author"
+          >
+            <img :src="comment.author.image" class="comment-author-img" />
           </nuxt-link>
           &nbsp;
-          <nuxt-link :to="{
-            name: 'profile',
-            params: {
-              username: comment.author.username,
-            }
-          }" class="comment-author">
+          <nuxt-link
+            :to="{
+              name: 'profile',
+              params: {
+                username: comment.author.username,
+              },
+            }"
+            class="comment-author"
+          >
             {{ comment.author.username }}
           </nuxt-link>
           <span class="date-posted">{{ comment.updatedAt | date() }}</span>
-          <span class="mod-options" v-if="user.username === comment.author.username">
+          <span
+            class="mod-options"
+            v-if="user.username === comment.author.username"
+          >
             <i class="ion-trash-a" @click="remove(comment.id)"></i>
           </span>
         </div>
@@ -124,6 +134,4 @@ export default {
 }
 </script>
 
-<style>
-
-</style>
+<style></style>

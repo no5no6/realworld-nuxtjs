@@ -22,7 +22,7 @@
       >
       <span class="date">{{ article.updatedAt | date() }}</span>
     </div>
-    <span v-if="user.username === article.author.username">
+    <span v-if="user && user.username === article.author.username">
       <nuxt-link
         class="btn btn-outline-secondary btn-sm"
         :to="{
