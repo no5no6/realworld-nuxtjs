@@ -33,9 +33,9 @@
             }">
               <img
                 class="user-pic"
-                src="https://octodex.github.com/images/spidertocat.png"
+                :src="user.image"
               />
-              no5no6
+              {{user.username}}
             </nuxt-link>
           </li>
         </ul>
