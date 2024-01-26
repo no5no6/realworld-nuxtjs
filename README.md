@@ -1,5 +1,5 @@
 # realworld-nuxtjs
-在线 [Demo](https://realworld-nuxtjs-beta.vercel.app/)  
+在线 [Demo](https://realworld.no5no6.com/)  
 nuxt 的练习项目。基于 [realworld](https://github.com/gothinkster/realworld) 项目构建。
 
 ## 本地安装与使用
