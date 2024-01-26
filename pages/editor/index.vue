@@ -34,7 +34,7 @@
                   v-model="obj.tags"
                   type="text"
                   class="form-control"
-                  placeholder="Enter tags"
+                  placeholder="Input labels separated by ','"
                 />
                 <div class="tag-list"></div>
               </fieldset>

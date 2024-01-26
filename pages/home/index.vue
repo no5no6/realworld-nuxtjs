@@ -105,6 +105,10 @@
               <h1>{{ article.title }}</h1>
               <p>{{ article.description }}</p>
               <span>Read more...</span>
+              <ul class="tag-list">
+                <li class="tag-default tag-pill tag-outline" v-for="(tag, index) in article.tagList" :key="index">{{ tag }}</li>
+              </ul>
+              
             </nuxt-link>
           </div>
           <!-- <div v-if="pageLoading" class="article-preview" >
