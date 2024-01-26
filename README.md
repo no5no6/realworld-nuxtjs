@@ -22,7 +22,7 @@ Look at the [Nuxt 2](https://v2.nuxt.com) documentation to learn more.
 
 #### 2. `yarn serve`  
 
-#### 3. Visit [localhost:3000](localhost:3000)
+#### 3. Visit [localhost:3000](http://localhost:3000)
 
 # Other
 + #### Since this is a Nuxt 2 project and is deployed on vercel, the `vercel.json` file is added and the `node-fetch-native` package is installed.
