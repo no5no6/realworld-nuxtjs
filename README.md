@@ -1,16 +1,33 @@
 # ![RealWorld Example App](logo.png)
-# realworld-nuxtjs
-在线 [Demo](https://realworld.no5no6.com/)  
-nuxt 项目。基于 [Realworld](https://github.com/gothinkster/realworld) 项目构建。
 
-## 本地安装与使用
-  + 安装依赖 `yarn install`
-  + 运行 `yarn serve`
-  + 访问 [localhost:3000](http://localhost:3000)
+> ### [Nuxt 2](https://v2.nuxt.com) codebase containing real world examples (CRUD, auth, advanced patterns, etc) that adheres to the [RealWorld](https://github.com/gothinkster/realworld) spec and API.
 
-## 其他
-  + 编码风格 [standard](https://github.com/standard/standard) 。[编辑器配置](https://github.com/no5no6/Cheese/blob/master/%E9%A1%B9%E7%9B%AE%E6%9E%84%E5%BB%BA/webpack/standard%E7%BC%96%E7%A0%81%E9%A3%8E%E6%A0%BC%E9%85%8D%E7%BD%AE.md)
-  + 部署工具 [Vercel](https://vercel.com)
-    > 因为是 nuxt.js 2.x 项目，在 vercel 上部署所以添加 `vercel.json` 文件，并且安装了 `node-fetch-native` 包。
-  + 接口文档 [API](https://github.com/gothinkster/realworld/tree/master/api)
-  
+
+### [Demo](https://realworld.no5no6.com)&nbsp;&nbsp;&nbsp;&nbsp;[RealWorld](https://github.com/gothinkster/realworld)
+
+
+This codebase was created to demonstrate a fully fledged fullstack application built with **[Nuxt 2](https://v2.nuxt.com)** including CRUD operations, authentication, routing, pagination, and more.
+
+We've gone to great lengths to adhere to the **[Standard](https://github.com/standard/standard)** community styleguides & best practices.
+
+For more information on how to this works with other frontends/backends, head over to the [RealWorld](https://github.com/gothinkster/realworld) repo.
+
+
+# How it works
+Look at the [Nuxt 2](https://v2.nuxt.com) documentation to learn more.
+
+
+# Getting started
+#### 1. `yarn install`  
+
+#### 2. `yarn serve`  
+
+#### 3. Visit [localhost:3000](localhost:3000)
+
+# Other
++ #### Since this is a Nuxt 2 project and is deployed on vercel, the `vercel.json` file is added and the `node-fetch-native` package is installed.
++ ####  **[Standard](https://github.com/standard/standard)** Coding Style [Editor Configuration](standard.md)
++ #### Automated deployment with [`github action` and `pm2`](step.md)
+
+
+
